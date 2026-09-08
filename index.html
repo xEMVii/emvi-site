@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>@EMVi</title>
-
     <meta name="description" content="23 | He/Him | Just a small shy fox 🦊">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,27 +15,22 @@
         rel="stylesheet"
     >
 
+    <!-- Font Awesome - ikony sociali -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- EKRAN "CLICK TO ENTER" -->
     <div id="enter-screen">
-        <div class="enter-text">
-            click to enter...
-        </div>
+        <div class="enter-text">click to enter...</div>
     </div>
 
-
-    <!-- TŁO WIDEO -->
-    <video
-        id="background-video"
-        autoplay
-        muted
-        loop
-        playsinline
-    >
+    <video id="background-video" autoplay muted loop playsinline>
         <source
             src="https://r2.guns.lol/749db8c5-717c-4694-9b23-33b2d93c19a8.mp4"
             type="video/mp4"
@@ -46,50 +40,55 @@
     <div class="background-overlay"></div>
 
 
-    <!-- GŁÓWNA ZAWARTOŚĆ -->
+    <!-- MAŁY PANEL GŁOŚNOŚCI -->
+    <div class="volume-control">
+        <i class="fa-solid fa-volume-high"></i>
+
+        <input
+            id="volume"
+            type="range"
+            min="0"
+            max="100"
+            value="100"
+        >
+    </div>
+
+
     <main class="page">
 
         <section class="profile-card">
 
-            <!-- AVATAR -->
             <img
                 class="avatar"
                 src="https://r2.guns.lol/44c2fb3f-d5e4-4b84-a32f-bcd2593af51d.webp"
                 alt="EMVi"
             >
 
-
-            <!-- NAZWA -->
             <div class="username-container">
 
                 <span class="sparkle">✦</span>
 
-                <h1 class="username">
-                    EMVi
-                </h1>
+                <h1 class="username">EMVi</h1>
 
-                <span class="verified">
-                    ✓
-                </span>
+                <span class="verified">✓</span>
 
             </div>
 
-
-            <!-- OPIS -->
             <p class="subtitle">
                 23 | He/Him | Just a small shy fox 🦊
             </p>
 
 
-            <!-- SOCIAL MEDIA -->
+            <!-- SOCIAL ICONS -->
             <div class="socials">
 
                 <a
                     href="#"
                     class="social"
                     data-copy="emvi."
+                    title="Discord: emvi."
                 >
-                    Discord
+                    <i class="fa-brands fa-discord"></i>
                 </a>
 
                 <a
@@ -97,8 +96,9 @@
                     class="social"
                     target="_blank"
                     rel="noopener"
+                    title="Telegram"
                 >
-                    Telegram
+                    <i class="fa-brands fa-telegram"></i>
                 </a>
 
                 <a
@@ -106,8 +106,9 @@
                     class="social"
                     target="_blank"
                     rel="noopener"
+                    title="X"
                 >
-                    X
+                    <i class="fa-brands fa-x-twitter"></i>
                 </a>
 
                 <a
@@ -115,8 +116,9 @@
                     class="social"
                     target="_blank"
                     rel="noopener"
+                    title="TikTok"
                 >
-                    TikTok
+                    <i class="fa-brands fa-tiktok"></i>
                 </a>
 
                 <a
@@ -124,8 +126,9 @@
                     class="social"
                     target="_blank"
                     rel="noopener"
+                    title="Spotify"
                 >
-                    Spotify
+                    <i class="fa-brands fa-spotify"></i>
                 </a>
 
                 <a
@@ -133,8 +136,9 @@
                     class="social"
                     target="_blank"
                     rel="noopener"
+                    title="Twitch"
                 >
-                    Twitch
+                    <i class="fa-brands fa-twitch"></i>
                 </a>
 
                 <a
@@ -142,8 +146,9 @@
                     class="social"
                     target="_blank"
                     rel="noopener"
+                    title="YouTube"
                 >
-                    YouTube
+                    <i class="fa-brands fa-youtube"></i>
                 </a>
 
                 <a
@@ -151,8 +156,9 @@
                     class="social"
                     target="_blank"
                     rel="noopener"
+                    title="Kick"
                 >
-                    Kick
+                    <i class="fa-solid fa-k"></i>
                 </a>
 
                 <a
@@ -160,8 +166,9 @@
                     class="social"
                     target="_blank"
                     rel="noopener"
+                    title="Instagram"
                 >
-                    Instagram
+                    <i class="fa-brands fa-instagram"></i>
                 </a>
 
                 <a
@@ -169,8 +176,9 @@
                     class="social"
                     target="_blank"
                     rel="noopener"
+                    title="osu!"
                 >
-                    osu!
+                    <i class="fa-solid fa-circle"></i>
                 </a>
 
                 <a
@@ -178,8 +186,9 @@
                     class="social"
                     target="_blank"
                     rel="noopener"
+                    title="VRChat"
                 >
-                    VRChat
+                    <i class="fa-solid fa-vr-cardboard"></i>
                 </a>
 
                 <a
@@ -187,52 +196,24 @@
                     class="social"
                     target="_blank"
                     rel="noopener"
+                    title="OnlyFans"
                 >
-                    only-fans.me
+                    <i class="fa-solid fa-link"></i>
                 </a>
 
             </div>
 
 
-            <!-- ODTWARZACZ MUZYKI -->
-            <div class="audio-player">
+            <!-- MINIMALISTYCZNY PLAYER -->
+            <div class="music-player">
 
-                <button
-                    id="play-btn"
-                    type="button"
-                    aria-label="Odtwarzaj"
-                >
-                    ▶
+                <button id="play-btn" title="Play / Pause">
+                    <i class="fa-solid fa-play"></i>
                 </button>
 
-                <div class="track-info">
-
-                    <span id="track-name">
-                        rooftop
-                    </span>
-
-                    <div class="progress">
-                        <div id="progress-bar"></div>
-                    </div>
-
-                </div>
-
-                <button
-                    id="next-btn"
-                    type="button"
-                    aria-label="Następny utwór"
-                >
-                    ↻
+                <button id="next-btn" title="Next">
+                    <i class="fa-solid fa-forward-step"></i>
                 </button>
-
-                <input
-                    id="volume"
-                    type="range"
-                    min="0"
-                    max="100"
-                    value="100"
-                    aria-label="Głośność"
-                >
 
             </div>
 
@@ -241,11 +222,8 @@
     </main>
 
 
-    <!-- AUDIO -->
     <audio id="audio"></audio>
 
-
-    <!-- NASZ JAVASCRIPT -->
     <script src="script.js"></script>
 
 </body>
