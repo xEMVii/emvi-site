@@ -1,793 +1,503 @@
 :root {
---background: #080808;
+    --cyan: #00ffff;
+    --green: #00ff99;
+    --blue: #2162ff;
+    --background: #080808;
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  }
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 html,
 body {
-width: 100%;
-height: 100%;
-overflow: hidden;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
-font-family: "Onest", sans-serif;
-background: var(--background);
-color: white;
+    font-family: "Onest", sans-serif;
+    background: var(--background);
+    color: white;
 }
 
 /* =========================
-BACKGROUND
+   BACKGROUND
 ========================= */
 
 #background-video {
-position: fixed;
-inset: 0;
-
-```
-width: 100%;
-height: 100%;
-
-object-fit: cover;
-
-z-index: -3;
-
-filter: brightness(0.75);
-```
-
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -3;
+    filter: brightness(0.75);
 }
 
 .background-overlay {
-position: fixed;
-inset: 0;
+    position: fixed;
+    inset: 0;
+    z-index: -2;
 
-```
-z-index: -2;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 255, 255, 0.08),
+            transparent 45%
+        ),
+        rgba(0, 0, 0, 0.35);
 
-background:
-    radial-gradient(
-        circle at center,
-        rgba(0, 255, 255, 0.08),
-        transparent 45%
-    ),
-    rgba(0, 0, 0, 0.35);
-
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-```
-
+    backdrop-filter: blur(5px);
 }
 
 /* =========================
-ENTER SCREEN
+   ENTER SCREEN
 ========================= */
 
 #enter-screen {
-position: fixed;
-inset: 0;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
 
-```
-z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-display: flex;
-align-items: center;
-justify-content: center;
+    background: #080808;
 
-background: #080808;
+    cursor: pointer;
 
-cursor: pointer;
-
-transition:
-    opacity 0.6s ease,
-    visibility 0.6s ease;
-```
-
+    transition:
+        opacity 0.6s ease,
+        visibility 0.6s ease;
 }
 
 #enter-screen span {
-font-size: 14px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.65);
+    letter-spacing: 0.3px;
 
-```
-color: rgba(255, 255, 255, 0.65);
-
-letter-spacing: 0.3px;
-
-animation: enterPulse 2s infinite;
-```
-
+    animation: enterPulse 2s infinite;
 }
 
 #enter-screen.hidden {
-opacity: 0;
-visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
 }
 
 @keyframes enterPulse {
-0%,
-100% {
-opacity: 0.45;
-}
+    0%, 100% {
+        opacity: 0.45;
+    }
 
-```
-50% {
-    opacity: 1;
-}
-```
-
+    50% {
+        opacity: 1;
+    }
 }
 
 /* =========================
-VOLUME
+   VOLUME
 ========================= */
 
 .volume-control {
-position: fixed;
+    position: fixed;
+    top: 20px;
+    left: 20px;
 
-```
-top: 20px;
-left: 20px;
+    z-index: 20;
 
-z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 9px;
 
-display: flex;
-align-items: center;
+    opacity: 0.72;
 
-gap: 9px;
-
-opacity: 0.72;
-
-font-size: 15px;
-
-transition: opacity 0.2s ease;
-```
-
+    transition: opacity 0.2s ease;
 }
 
 .volume-control:hover {
-opacity: 1;
-}
-
-.volume-control > i {
-display: block;
-
-```
-width: 16px;
-
-color: rgba(255, 255, 255, 0.85);
-
-font-size: 15px;
-```
-
-}
-
-#volume {
-display: block;
-
-```
-width: 90px;
-height: 4px;
-
-margin: 0;
-padding: 0;
-
-appearance: none;
--webkit-appearance: none;
-
-background: rgba(255, 255, 255, 0.25);
-
-border: 0;
-border-radius: 10px;
-
-outline: none;
-
-cursor: pointer;
-```
-
-}
-
-#volume::-webkit-slider-runnable-track {
-height: 4px;
-
-```
-background: rgba(255, 255, 255, 0.25);
-
-border-radius: 10px;
-```
-
-}
-
-#volume::-webkit-slider-thumb {
-appearance: none;
--webkit-appearance: none;
-
-```
-width: 10px;
-height: 10px;
-
-margin-top: -3px;
-
-border: 0;
-border-radius: 50%;
-
-background: white;
-
-cursor: pointer;
-```
-
-}
-
-#volume::-moz-range-track {
-height: 4px;
-
-```
-background: rgba(255, 255, 255, 0.25);
-
-border-radius: 10px;
-```
-
-}
-
-#volume::-moz-range-thumb {
-width: 10px;
-height: 10px;
-
-```
-border: 0;
-border-radius: 50%;
-
-background: white;
-
-cursor: pointer;
-```
-
-}
-
-/* =========================
-PROFILE
-========================= */
-
-.profile-card {
-position: absolute;
-
-```
-top: 50%;
-left: 50%;
-
-width: min(40rem, calc(100vw - 30px));
-
-padding: 35px 15px;
-
-transform: translate(-50%, -50%);
-
-text-align: center;
-
-border-radius: 20px;
-
-background: rgba(8, 8, 8, 0.10);
-
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-
-animation: profileFade 0.9s ease;
-```
-
-}
-
-@keyframes profileFade {
-from {
-opacity: 0;
-
-```
-    transform:
-        translate(-50%, -47%);
-}
-
-to {
     opacity: 1;
-
-    transform:
-        translate(-50%, -50%);
-}
-```
-
 }
 
-/* =========================
-AVATAR
-========================= */
-
-.avatar {
-display: block;
-
-```
-width: 110px;
-height: 110px;
-
-margin: 0 auto 12px;
-
-object-fit: cover;
-
-border: 2px solid rgba(255, 255, 255, 0.3);
-
-border-radius: 50%;
-
-box-shadow:
-    0 0 25px rgba(0, 255, 255, 0.25);
-```
-
-}
-
-/* =========================
-USERNAME
-========================= */
-
-.username {
-display: flex;
-
-```
-align-items: center;
-justify-content: center;
-
-gap: 6px;
-
-height: 38px;
-
-font-size: 28px;
-font-weight: 800;
-```
-
-}
-
-.username-effect {
-position: relative;
-
-```
-display: inline-flex;
-
-align-items: center;
-justify-content: center;
-
-height: 38px;
-
-isolation: isolate;
-```
-
-}
-
-.username-effect > img {
-position: absolute;
-
-```
-top: 50%;
-left: 50%;
-
-width: 52px;
-height: 52px;
-
-transform: translate(-50%, -50%);
-
-object-fit: contain;
-
-z-index: -1;
-
-pointer-events: none;
-
-opacity: 0.8;
-```
-
-}
-
-.username-text {
-position: relative;
-
-```
-z-index: 2;
-
-display: block;
-
-color: #00ffff;
-
-background: linear-gradient(
-    90deg,
-    #17ffff,
-    #00ff99
-);
-
--webkit-background-clip: text;
-background-clip: text;
-
--webkit-text-fill-color: transparent;
-
-text-shadow:
-    0 0 16.5px rgba(0, 255, 255, 0.8);
-```
-
-}
-
-.verified {
-position: relative;
-
-```
-z-index: 3;
-
-color: #00c8ff;
-
-font-size: 14px;
-
-filter:
-    drop-shadow(
-        0 0 5px rgba(0, 200, 255, 0.8)
-    );
-```
-
-}
-
-/* =========================
-SUBTITLE
-========================= */
-
-.subtitle {
-margin-top: 6px;
-
-```
-font-size: 13px;
-
-color: rgba(255, 255, 255, 0.7);
-```
-
-}
-
-/* =========================
-SOCIALS
-========================= */
-
-.socials {
-display: flex;
-
-```
-flex-wrap: wrap;
-
-justify-content: center;
-
-gap: 10px;
-
-margin-top: 24px;
-```
-
-}
-
-.social {
-display: flex;
-
-```
-align-items: center;
-justify-content: center;
-
-width: 43px;
-height: 43px;
-
-border-radius: 12px;
-
-text-decoration: none;
-
-font-size: 19px;
-
-transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    filter 0.2s ease;
-```
-
-}
-
-/* Discord */
-
-.discord {
-color: #5865F2;
-
-```
-background: rgba(88, 101, 242, 0.16);
-
-border: 1px solid rgba(88, 101, 242, 0.30);
-```
-
-}
-
-.discord:hover {
-box-shadow:
-0 0 18px rgba(88, 101, 242, 0.55);
-}
-
-/* Telegram */
-
-.telegram {
-color: #229ED9;
-
-```
-background: rgba(34, 158, 217, 0.16);
-
-border: 1px solid rgba(34, 158, 217, 0.30);
-```
-
-}
-
-.telegram:hover {
-box-shadow:
-0 0 18px rgba(34, 158, 217, 0.55);
-}
-
-/* X */
-
-.twitter {
-color: #ffffff;
-
-```
-background: rgba(255, 255, 255, 0.10);
-
-border: 1px solid rgba(255, 255, 255, 0.22);
-```
-
-}
-
-.twitter:hover {
-box-shadow:
-0 0 18px rgba(255, 255, 255, 0.35);
-}
-
-/* TikTok */
-
-.tiktok {
-color: #ffffff;
-
-```
-background: rgba(0, 242, 234, 0.12);
-
-border: 1px solid rgba(0, 242, 234, 0.28);
-
-text-shadow:
-    -1px 0 #ff0050,
-    1px 0 #00f2ea;
-```
-
-}
-
-.tiktok:hover {
-box-shadow:
-0 0 18px rgba(0, 242, 234, 0.45);
-}
-
-/* Spotify */
-
-.spotify {
-color: #1DB954;
-
-```
-background: rgba(29, 185, 84, 0.16);
-
-border: 1px solid rgba(29, 185, 84, 0.30);
-```
-
-}
-
-.spotify:hover {
-box-shadow:
-0 0 18px rgba(29, 185, 84, 0.55);
-}
-
-/* Twitch */
-
-.twitch {
-color: #9146FF;
-
-```
-background: rgba(145, 70, 255, 0.16);
-
-border: 1px solid rgba(145, 70, 255, 0.30);
-```
-
-}
-
-.twitch:hover {
-box-shadow:
-0 0 18px rgba(145, 70, 255, 0.55);
-}
-
-/* YouTube */
-
-.youtube {
-color: #FF0000;
-
-```
-background: rgba(255, 0, 0, 0.15);
-
-border: 1px solid rgba(255, 0, 0, 0.30);
-```
-
-}
-
-.youtube:hover {
-box-shadow:
-0 0 18px rgba(255, 0, 0, 0.55);
-}
-
-/* Kick */
-
-.kick {
-color: #53FC18;
-
-```
-background: rgba(83, 252, 24, 0.15);
-
-border: 1px solid rgba(83, 252, 24, 0.30);
-```
-
-}
-
-.kick-icon {
-font-family: Arial, sans-serif;
-
-```
-font-size: 20px;
-font-weight: 900;
-```
-
-}
-
-.kick:hover {
-box-shadow:
-0 0 18px rgba(83, 252, 24, 0.55);
-}
-
-/* Instagram */
-
-.instagram {
-color: #E4405F;
-
-```
-background:
-    linear-gradient(
-        135deg,
-        rgba(131, 58, 180, 0.18),
-        rgba(225, 48, 108, 0.18),
-        rgba(252, 175, 69, 0.18)
-    );
-
-border: 1px solid rgba(228, 64, 95, 0.30);
-```
-
-}
-
-.instagram:hover {
-box-shadow:
-0 0 18px rgba(228, 64, 95, 0.55);
-}
-
-/* osu */
-
-.osu {
-background: rgba(255, 102, 170, 0.14);
-
-```
-border: 1px solid rgba(255, 102, 170, 0.30);
-```
-
-}
-
-.osu:hover {
-box-shadow:
-0 0 18px rgba(255, 102, 170, 0.55);
-}
-
-/* VRChat */
-
-.vrchat {
-background: rgba(0, 161, 255, 0.14);
-
-```
-border: 1px solid rgba(0, 161, 255, 0.30);
-```
-
-}
-
-.vrchat:hover {
-box-shadow:
-0 0 18px rgba(0, 161, 255, 0.55);
-}
-
-/* only-fans.me */
-
-.onlyfans {
-background: rgba(0, 175, 240, 0.14);
-
-```
-border: 1px solid rgba(0, 175, 240, 0.30);
-```
-
-}
-
-.onlyfans:hover {
-box-shadow:
-0 0 18px rgba(0, 175, 240, 0.55);
-}
-
-/* Social images */
-
-.social img {
-display: block;
-
-```
-width: 21px;
-height: 21px;
-
-object-fit: contain;
-```
-
-}
-
-/* General hover */
-
-.social:hover {
-transform: translateY(-3px);
-
-```
-filter: brightness(1.2);
-```
-
-}
-
-/* =========================
-MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-```
-.profile-card {
-    width: calc(100vw - 24px);
-
-    padding: 30px 10px;
-}
-
-.avatar {
-    width: 95px;
-    height: 95px;
-}
-
-.username {
-    font-size: 25px;
-}
-
-.username-effect {
-    height: 34px;
-}
-
-.username-effect > img {
-    width: 48px;
-    height: 48px;
-}
-
-.socials {
-    gap: 8px;
-}
-
-.social {
-    width: 41px;
-    height: 41px;
-}
-
-.volume-control {
-    top: 16px;
-    left: 16px;
+.volume-control i {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 #volume {
     width: 85px;
-}
-```
+    height: 4px;
 
+    appearance: none;
+    -webkit-appearance: none;
+
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+#volume::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+    background: white;
+
+    cursor: pointer;
+}
+
+#volume::-moz-range-thumb {
+    width: 9px;
+    height: 9px;
+
+    border: none;
+    border-radius: 50%;
+    background: white;
+
+    cursor: pointer;
+}
+
+/* =========================
+   PROFILE CARD
+========================= */
+
+.profile-card {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(40rem, calc(100vw - 30px));
+
+    padding: 35px 15px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background: rgba(8, 8, 8, 0.10);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    animation: profileFade 0.9s ease;
+}
+
+@keyframes profileFade {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -47%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* =========================
+   AVATAR
+========================= */
+
+.avatar {
+    width: 110px;
+    height: 110px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(255, 255, 255, 0.3);
+
+    box-shadow:
+        0 0 25px rgba(0, 255, 255, 0.25);
+
+    margin-bottom: 12px;
+}
+
+/* =========================
+   USERNAME
+========================= */
+
+.username {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    background: linear-gradient(
+        90deg,
+        #17ffff,
+        #00ff99
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    text-shadow:
+        0 0 16px rgba(0, 255, 255, 0.8);
+}
+
+.sparkle {
+    width: 18px;
+    height: 18px;
+}
+
+.verified {
+    font-size: 14px;
+    color: #00c8ff;
+
+    -webkit-text-fill-color: #00c8ff;
+
+    filter:
+        drop-shadow(0 0 5px rgba(0, 200, 255, 0.8));
+}
+
+/* =========================
+   SUBTITLE
+========================= */
+
+.subtitle {
+    margin-top: 6px;
+
+    font-size: 13px;
+
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* =========================
+   SOCIAL ICONS
+========================= */
+
+.socials {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 24px;
+}
+
+.social {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 19px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+/* Individual colors */
+
+.discord {
+    color: #5865F2;
+    background: rgba(88, 101, 242, 0.16);
+    border: 1px solid rgba(88, 101, 242, 0.30);
+}
+
+.telegram {
+    color: #229ED9;
+    background: rgba(34, 158, 217, 0.16);
+    border: 1px solid rgba(34, 158, 217, 0.30);
+}
+
+.twitter {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.tiktok {
+    color: #ffffff;
+    background: rgba(0, 242, 234, 0.12);
+    border: 1px solid rgba(0, 242, 234, 0.28);
+
+    text-shadow:
+        -1px 0 #ff0050,
+        1px 0 #00f2ea;
+}
+
+.spotify {
+    color: #1DB954;
+    background: rgba(29, 185, 84, 0.16);
+    border: 1px solid rgba(29, 185, 84, 0.30);
+}
+
+.twitch {
+    color: #9146FF;
+    background: rgba(145, 70, 255, 0.16);
+    border: 1px solid rgba(145, 70, 255, 0.30);
+}
+
+.youtube {
+    color: #FF0000;
+    background: rgba(255, 0, 0, 0.15);
+    border: 1px solid rgba(255, 0, 0, 0.30);
+}
+
+.kick {
+    color: #53FC18;
+    background: rgba(83, 252, 24, 0.15);
+    border: 1px solid rgba(83, 252, 24, 0.30);
+}
+
+.kick-icon {
+    font-size: 20px;
+    font-weight: 900;
+    font-family: Arial, sans-serif;
+}
+
+.instagram {
+    color: #E4405F;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(131, 58, 180, 0.18),
+            rgba(225, 48, 108, 0.18),
+            rgba(252, 175, 69, 0.18)
+        );
+
+    border: 1px solid rgba(228, 64, 95, 0.30);
+}
+
+.osu {
+    background: rgba(255, 102, 170, 0.14);
+    border: 1px solid rgba(255, 102, 170, 0.30);
+}
+
+.vrchat {
+    background: rgba(0, 161, 255, 0.14);
+    border: 1px solid rgba(0, 161, 255, 0.30);
+}
+
+.onlyfans {
+    background: rgba(0, 175, 240, 0.14);
+    border: 1px solid rgba(0, 175, 240, 0.30);
+}
+
+.social img {
+    width: 21px;
+    height: 21px;
+
+    object-fit: contain;
+}
+
+.social:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.2);
+}
+
+.discord:hover {
+    box-shadow: 0 0 18px rgba(88, 101, 242, 0.55);
+}
+
+.telegram:hover {
+    box-shadow: 0 0 18px rgba(34, 158, 217, 0.55);
+}
+
+.twitter:hover {
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
+}
+
+.tiktok:hover {
+    box-shadow:
+        0 0 18px rgba(0, 242, 234, 0.45);
+}
+
+.spotify:hover {
+    box-shadow: 0 0 18px rgba(29, 185, 84, 0.55);
+}
+
+.twitch:hover {
+    box-shadow: 0 0 18px rgba(145, 70, 255, 0.55);
+}
+
+.youtube:hover {
+    box-shadow: 0 0 18px rgba(255, 0, 0, 0.55);
+}
+
+.kick:hover {
+    box-shadow: 0 0 18px rgba(83, 252, 24, 0.55);
+}
+
+.instagram:hover {
+    box-shadow: 0 0 18px rgba(228, 64, 95, 0.55);
+}
+
+.osu:hover {
+    box-shadow: 0 0 18px rgba(255, 102, 170, 0.55);
+}
+
+.vrchat:hover {
+    box-shadow: 0 0 18px rgba(0, 161, 255, 0.55);
+}
+
+.onlyfans:hover {
+    box-shadow: 0 0 18px rgba(0, 175, 240, 0.55);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .profile-card {
+        width: calc(100vw - 24px);
+        padding: 30px 10px;
+    }
+
+    .avatar {
+        width: 95px;
+        height: 95px;
+    }
+
+    .username {
+        font-size: 25px;
+    }
+
+    .socials {
+        gap: 8px;
+    }
+
+    .social {
+        width: 41px;
+        height: 41px;
+    }
+
+    .volume-control {
+        top: 16px;
+        left: 16px;
+    }
+
+    #volume {
+        width: 80px;
+    }
 }
