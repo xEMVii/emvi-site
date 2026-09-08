@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@EMVi</title>
+
+    <meta name="description" content="23 | He/Him | Just a small shy fox 🦊">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- EKRAN "CLICK TO ENTER" -->
+    <div id="enter-screen">
+        <div class="enter-text">
+            click to enter...
+        </div>
+    </div>
+
+
+    <!-- TŁO WIDEO -->
+    <video
+        id="background-video"
+        autoplay
+        muted
+        loop
+        playsinline
+    >
+        <source
+            src="https://r2.guns.lol/749db8c5-717c-4694-9b23-33b2d93c19a8.mp4"
+            type="video/mp4"
+        >
+    </video>
+
+    <div class="background-overlay"></div>
+
+
+    <!-- GŁÓWNA ZAWARTOŚĆ -->
+    <main class="page">
+
+        <section class="profile-card">
+
+            <!-- AVATAR -->
+            <img
+                class="avatar"
+                src="https://r2.guns.lol/44c2fb3f-d5e4-4b84-a32f-bcd2593af51d.webp"
+                alt="EMVi"
+            >
+
+
+            <!-- NAZWA -->
+            <div class="username-container">
+
+                <span class="sparkle">✦</span>
+
+                <h1 class="username">
+                    EMVi
+                </h1>
+
+                <span class="verified">
+                    ✓
+                </span>
+
+            </div>
+
+
+            <!-- OPIS -->
+            <p class="subtitle">
+                23 | He/Him | Just a small shy fox 🦊
+            </p>
+
+
+            <!-- SOCIAL MEDIA -->
+            <div class="socials">
+
+                <a
+                    href="#"
+                    class="social"
+                    data-copy="emvi."
+                >
+                    Discord
+                </a>
+
+                <a
+                    href="https://t.me/xEMVi"
+                    class="social"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Telegram
+                </a>
+
+                <a
+                    href="https://x.com/EMVi__"
+                    class="social"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    X
+                </a>
+
+                <a
+                    href="https://tiktok.com/@xemvi"
+                    class="social"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    TikTok
+                </a>
+
+                <a
+                    href="https://open.spotify.com/user/fwxz81ywe2xy5ivs5mnnyk1gc"
+                    class="social"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Spotify
+                </a>
+
+                <a
+                    href="https://twitch.tv/EMVi___"
+                    class="social"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Twitch
+                </a>
+
+                <a
+                    href="https://youtube.com/@EMVi"
+                    class="social"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    YouTube
+                </a>
+
+                <a
+                    href="https://kick.com/EMVi"
+                    class="social"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Kick
+                </a>
+
+                <a
+                    href="https://instagram.com/its_emvi"
+                    class="social"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Instagram
+                </a>
+
+                <a
+                    href="https://osu.ppy.sh/users/7916123"
+                    class="social"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    osu!
+                </a>
+
+                <a
+                    href="https://vrchat.com/home/user/usr_a70b0534-7d9a-4340-8c03-ef8f95243ddf"
+                    class="social"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    VRChat
+                </a>
+
+                <a
+                    href="https://only-fans.me/EMVi"
+                    class="social"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    only-fans.me
+                </a>
+
+            </div>
+
+
+            <!-- ODTWARZACZ MUZYKI -->
+            <div class="audio-player">
+
+                <button
+                    id="play-btn"
+                    type="button"
+                    aria-label="Odtwarzaj"
+                >
+                    ▶
+                </button>
+
+                <div class="track-info">
+
+                    <span id="track-name">
+                        rooftop
+                    </span>
+
+                    <div class="progress">
+                        <div id="progress-bar"></div>
+                    </div>
+
+                </div>
+
+                <button
+                    id="next-btn"
+                    type="button"
+                    aria-label="Następny utwór"
+                >
+                    ↻
+                </button>
+
+                <input
+                    id="volume"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="100"
+                    aria-label="Głośność"
+                >
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- AUDIO -->
+    <audio id="audio"></audio>
+
+
+    <!-- NASZ JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+</html>
