@@ -1,6 +1,4 @@
 :root {
---cyan: #00ffff;
---green: #00ff99;
 --background: #080808;
 }
 
@@ -134,7 +132,7 @@ position: fixed;
 top: 20px;
 left: 20px;
 
-z-index: 20;
+z-index: 50;
 
 display: flex;
 align-items: center;
@@ -142,6 +140,8 @@ align-items: center;
 gap: 9px;
 
 opacity: 0.72;
+
+font-size: 15px;
 
 transition: opacity 0.2s ease;
 ```
@@ -152,28 +152,51 @@ transition: opacity 0.2s ease;
 opacity: 1;
 }
 
-.volume-control i {
-font-size: 15px;
+.volume-control > i {
+display: block;
 
 ```
+width: 16px;
+
 color: rgba(255, 255, 255, 0.85);
+
+font-size: 15px;
 ```
 
 }
 
 #volume {
-width: 85px;
-height: 4px;
+display: block;
 
 ```
+width: 90px;
+height: 4px;
+
+margin: 0;
+padding: 0;
+
 appearance: none;
 -webkit-appearance: none;
 
 background: rgba(255, 255, 255, 0.25);
 
+border: 0;
 border-radius: 10px;
 
+outline: none;
+
 cursor: pointer;
+```
+
+}
+
+#volume::-webkit-slider-runnable-track {
+height: 4px;
+
+```
+background: rgba(255, 255, 255, 0.25);
+
+border-radius: 10px;
 ```
 
 }
@@ -183,10 +206,12 @@ appearance: none;
 -webkit-appearance: none;
 
 ```
-width: 9px;
-height: 9px;
+width: 10px;
+height: 10px;
 
-border: none;
+margin-top: -3px;
+
+border: 0;
 border-radius: 50%;
 
 background: white;
@@ -196,12 +221,23 @@ cursor: pointer;
 
 }
 
-#volume::-moz-range-thumb {
-width: 9px;
-height: 9px;
+#volume::-moz-range-track {
+height: 4px;
 
 ```
-border: none;
+background: rgba(255, 255, 255, 0.25);
+
+border-radius: 10px;
+```
+
+}
+
+#volume::-moz-range-thumb {
+width: 10px;
+height: 10px;
+
+```
+border: 0;
 border-radius: 50%;
 
 background: white;
@@ -222,11 +258,11 @@ position: absolute;
 top: 50%;
 left: 50%;
 
-transform: translate(-50%, -50%);
-
 width: min(40rem, calc(100vw - 30px));
 
 padding: 35px 15px;
+
+transform: translate(-50%, -50%);
 
 text-align: center;
 
@@ -266,20 +302,22 @@ AVATAR
 ========================= */
 
 .avatar {
+display: block;
+
+```
 width: 110px;
 height: 110px;
 
-```
-object-fit: cover;
+margin: 0 auto 12px;
 
-border-radius: 50%;
+object-fit: cover;
 
 border: 2px solid rgba(255, 255, 255, 0.3);
 
+border-radius: 50%;
+
 box-shadow:
     0 0 25px rgba(0, 255, 255, 0.25);
-
-margin-bottom: 12px;
 ```
 
 }
@@ -297,56 +335,62 @@ justify-content: center;
 
 gap: 6px;
 
+height: 38px;
+
 font-size: 28px;
 font-weight: 800;
-
-color: transparent;
-
-text-shadow:
-    0 0 16.5px rgba(0, 255, 255, 0.8);
 ```
 
 }
 
-.username-sparkle {
+.username-effect {
 position: relative;
 
 ```
-display: inline-block;
+display: inline-flex;
 
-line-height: 1;
+align-items: center;
+justify-content: center;
+
+height: 38px;
+
+isolation: isolate;
 ```
 
 }
 
-.username-sparkle > img {
+.username-effect > img {
 position: absolute;
 
 ```
-left: 50%;
 top: 50%;
+left: 50%;
 
-width: 105px;
-height: 105px;
+width: 52px;
+height: 52px;
 
 transform: translate(-50%, -50%);
 
 object-fit: contain;
 
+z-index: -1;
+
 pointer-events: none;
 
-z-index: 0;
-
-opacity: 0.85;
+opacity: 0.8;
 ```
 
 }
 
-.username-sparkle > span {
+.username-text {
 position: relative;
 
 ```
-z-index: 1;
+z-index: 2;
+
+display: block;
+
+color: #00ffff;
 
 background: linear-gradient(
     90deg,
@@ -358,6 +402,9 @@ background: linear-gradient(
 background-clip: text;
 
 -webkit-text-fill-color: transparent;
+
+text-shadow:
+    0 0 16.5px rgba(0, 255, 255, 0.8);
 ```
 
 }
@@ -366,14 +413,16 @@ background-clip: text;
 position: relative;
 
 ```
-z-index: 2;
-
-font-size: 14px;
+z-index: 3;
 
 color: #00c8ff;
 
+font-size: 14px;
+
 filter:
-    drop-shadow(0 0 5px rgba(0, 200, 255, 0.8));
+    drop-shadow(
+        0 0 5px rgba(0, 200, 255, 0.8)
+    );
 ```
 
 }
@@ -413,14 +462,14 @@ margin-top: 24px;
 }
 
 .social {
-width: 43px;
-height: 43px;
-
-```
 display: flex;
 
+```
 align-items: center;
 justify-content: center;
+
+width: 43px;
+height: 43px;
 
 border-radius: 12px;
 
@@ -580,12 +629,11 @@ border: 1px solid rgba(83, 252, 24, 0.30);
 }
 
 .kick-icon {
-font-size: 20px;
+font-family: Arial, sans-serif;
 
 ```
+font-size: 20px;
 font-weight: 900;
-
-font-family: Arial, sans-serif;
 ```
 
 }
@@ -619,7 +667,7 @@ box-shadow:
 0 0 18px rgba(228, 64, 95, 0.55);
 }
 
-/* osu! */
+/* osu */
 
 .osu {
 background: rgba(255, 102, 170, 0.14);
@@ -667,19 +715,21 @@ box-shadow:
 0 0 18px rgba(0, 175, 240, 0.55);
 }
 
-/* =========================
-SOCIAL ICONS GENERAL
-========================= */
+/* Social images */
 
 .social img {
+display: block;
+
+```
 width: 21px;
 height: 21px;
 
-```
 object-fit: contain;
 ```
 
 }
+
+/* General hover */
 
 .social:hover {
 transform: translateY(-3px);
@@ -712,9 +762,13 @@ MOBILE
     font-size: 25px;
 }
 
-.username-sparkle > img {
-    width: 95px;
-    height: 95px;
+.username-effect {
+    height: 34px;
+}
+
+.username-effect > img {
+    width: 48px;
+    height: 48px;
 }
 
 .socials {
@@ -732,7 +786,7 @@ MOBILE
 }
 
 #volume {
-    width: 80px;
+    width: 85px;
 }
 ```
 
