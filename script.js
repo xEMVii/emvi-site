@@ -11,20 +11,31 @@ const tracks = [
 let currentTrack = -1;
 
 /* =========================
-RANDOM TRACK
+RANDOM MUSIC
 ========================= */
 
-function loadRandomTrack() {
-let newTrack;
+function getRandomTrack() {
+let random;
 
 ```
 do {
-    newTrack = Math.floor(Math.random() * tracks.length);
-} while (tracks.length > 1 && newTrack === currentTrack);
+    random = Math.floor(Math.random() * tracks.length);
+} while (
+    tracks.length > 1 &&
+    random === currentTrack
+);
 
-currentTrack = newTrack;
+return random;
+```
 
+}
+
+function loadRandomTrack() {
+currentTrack = getRandomTrack();
+
+```
 audio.src = tracks[currentTrack];
+
 audio.volume = Number(volume.value);
 
 audio.load();
@@ -46,7 +57,10 @@ backgroundVideo.muted = false;
 try {
     await backgroundVideo.play();
 } catch (error) {
-    console.log("Background video playback blocked:", error);
+    console.log(
+        "Background video playback blocked:",
+        error
+    );
 }
 
 loadRandomTrack();
@@ -54,7 +68,10 @@ loadRandomTrack();
 try {
     await audio.play();
 } catch (error) {
-    console.log("Audio playback blocked:", error);
+    console.log(
+        "Audio playback blocked:",
+        error
+    );
 }
 ```
 
@@ -65,44 +82,95 @@ VOLUME
 ========================= */
 
 volume.addEventListener("input", () => {
+
+```
 audio.volume = Number(volume.value);
+```
+
 });
 
 /* =========================
 DISCORD COPY
 ========================= */
 
-document.querySelectorAll("[data-copy]").forEach(button => {
+document
+.querySelectorAll("[data-copy]")
+.forEach(button => {
 
 ```
-button.addEventListener("click", async () => {
+    button.addEventListener(
+        "click",
+        async () => {
 
-    const text = button.dataset.copy;
+            const text = button.dataset.copy;
 
-    try {
-        await navigator.clipboard.writeText(text);
+            try {
 
-        const original = button.innerHTML;
+                await navigator.clipboard.writeText(text);
 
-        button.innerHTML =
-            '<i class="fa-solid fa-check"></i>';
+                const original = button.innerHTML;
 
-        setTimeout(() => {
-            button.innerHTML = original;
-        }, 1200);
+                button.innerHTML =
+                    '<i class="fa-solid fa-check"></i>';
 
-    } catch (error) {
-        console.log("Copy failed:", error);
-    }
+                setTimeout(() => {
+
+                    button.innerHTML = original;
+
+                }, 1200);
+
+            } catch (error) {
+
+                console.log(
+                    "Copy failed:",
+                    error
+                );
+
+            }
+
+        }
+    );
+
 });
+```
+
+/* =========================
+INITIAL TRACK
+========================= */
+
+window.addEventListener("load", () => {
+
+```
+/*
+ * Choose a random song when
+ * the page is loaded.
+ */
+currentTrack = getRandomTrack();
+
+audio.src = tracks[currentTrack];
+
+audio.volume = Number(volume.value);
 ```
 
 });
 
 /* =========================
-PRELOAD RANDOM TRACK
+NEXT TRACK AUTOMATICALLY
 ========================= */
 
-window.addEventListener("load", () => {
+audio.addEventListener("ended", async () => {
+
+```
 loadRandomTrack();
+
+try {
+    await audio.play();
+} catch (error) {
+    console.log(
+        "Audio playback blocked:",
+        error
+    );
+}
+```
+
 });
