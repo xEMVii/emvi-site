@@ -237,6 +237,21 @@ body {
 
     font-size: 28px;
     font-weight: 800;
+}
+
+.username-wrapper {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    line-height: 1;
+}
+
+.username-text {
+    position: relative;
+    z-index: 2;
 
     background: linear-gradient(
         90deg,
@@ -246,25 +261,48 @@ body {
 
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
+
+    -webkit-text-fill-color: transparent;
 
     text-shadow:
         0 0 16px rgba(0, 255, 255, 0.8);
 }
 
 .sparkle {
-    width: 18px;
-    height: 18px;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 42px;
+    height: 42px;
+
+    transform: translate(-50%, -50%);
+
+    object-fit: contain;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    opacity: 0.9;
 }
 
 .verified {
+    position: relative;
+
+    z-index: 3;
+
     font-size: 14px;
+
     color: #00c8ff;
 
     -webkit-text-fill-color: #00c8ff;
 
     filter:
-        drop-shadow(0 0 5px rgba(0, 200, 255, 0.8));
+        drop-shadow(
+            0 0 5px rgba(0, 200, 255, 0.8)
+        );
 }
 
 /* =========================
