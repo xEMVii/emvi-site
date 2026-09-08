@@ -103,7 +103,7 @@ const titles = [
     "EMV",
     "EM",
     "E",
-    ""
+    "\u200B"
 ];
 
 let titleIndex = 0;
