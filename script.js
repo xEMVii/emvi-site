@@ -1,220 +1,96 @@
 const audio = document.getElementById("audio");
-const enterScreen = document.getElementById("enter-screen");
-
-const playButton = document.getElementById("play-btn");
-const nextButton = document.getElementById("next-btn");
-
 const volume = document.getElementById("volume");
-
-const backgroundVideo =
-    document.getElementById("background-video");
-
-
-const playIcon =
-    playButton.querySelector("i");
-
+const enterScreen = document.getElementById("enter-screen");
+const backgroundVideo = document.getElementById("background-video");
 
 const tracks = [
-
-    {
-        name: "rooftop",
-        url: "https://r2.guns.lol/7f21016c-c349-4ed3-9658-485ebacbff43.mp3"
-    },
-
-    {
-        name: "redflag",
-        url: "https://r2.guns.lol/5cc27252-4b7d-4941-8b69-11b243fcb428.mp3"
-    }
-
+    "https://r2.guns.lol/7f21016c-c349-4ed3-9658-485ebacbff43.mp3",
+    "https://r2.guns.lol/5cc27252-4b7d-4941-8b69-11b243fcb428.mp3"
 ];
 
-
-let currentTrack = 0;
-let shuffle = true;
-
+let currentTrack = null;
 
 /* =========================
-   LOAD TRACK
+   RANDOM MUSIC
 ========================= */
 
-function loadTrack(index, autoplay = false) {
-
-    currentTrack =
-        (index + tracks.length) % tracks.length;
-
-    audio.src =
-        tracks[currentTrack].url;
-
-    audio.volume =
-        Number(volume.value) / 100;
-
-
-    if (autoplay) {
-
-        audio.play()
-            .then(() => {
-
-                playIcon.className =
-                    "fa-solid fa-pause";
-
-            })
-            .catch(() => {});
-
-    }
-
+function getRandomTrack() {
+    return Math.floor(Math.random() * tracks.length);
 }
 
+function loadRandomTrack() {
+    currentTrack = getRandomTrack();
 
-/* =========================
-   NEXT TRACK
-========================= */
-
-function nextTrack() {
-
-    let next;
-
-    if (shuffle && tracks.length > 1) {
-
-        do {
-
-            next =
-                Math.floor(
-                    Math.random() * tracks.length
-                );
-
-        } while (
-            next === currentTrack
-        );
-
-    } else {
-
-        next =
-            currentTrack + 1;
-
-    }
-
-
-    loadTrack(next, true);
-
+    audio.src = tracks[currentTrack];
+    audio.volume = Number(volume.value);
+    audio.load();
 }
-
 
 /* =========================
    ENTER
 ========================= */
 
-function enterSite() {
+enterScreen.addEventListener("click", async () => {
 
     enterScreen.classList.add("hidden");
 
-
     backgroundVideo.muted = false;
 
-    backgroundVideo
-        .play()
-        .catch(() => {});
-
-
-    audio
-        .play()
-        .then(() => {
-
-            playIcon.className =
-                "fa-solid fa-pause";
-
-        })
-        .catch(() => {
-
-            playIcon.className =
-                "fa-solid fa-play";
-
-        });
-
-}
-
-
-enterScreen.addEventListener(
-    "click",
-    enterSite,
-    { once: true }
-);
-
-
-/* =========================
-   PLAY / PAUSE
-========================= */
-
-playButton.addEventListener(
-    "click",
-    async () => {
-
-        if (audio.paused) {
-
-            try {
-
-                await audio.play();
-
-                playIcon.className =
-                    "fa-solid fa-pause";
-
-            } catch (error) {
-
-                console.log(
-                    "Nie można odtworzyć muzyki."
-                );
-
-            }
-
-        } else {
-
-            audio.pause();
-
-            playIcon.className =
-                "fa-solid fa-play";
-
-        }
-
+    try {
+        await backgroundVideo.play();
+    } catch (error) {
+        console.log("Background video playback blocked:", error);
     }
-);
 
+    loadRandomTrack();
 
-/* =========================
-   NEXT
-========================= */
-
-nextButton.addEventListener(
-    "click",
-    nextTrack
-);
-
-
-/* =========================
-   AUTO NEXT
-========================= */
-
-audio.addEventListener(
-    "ended",
-    nextTrack
-);
-
+    try {
+        await audio.play();
+    } catch (error) {
+        console.log("Audio playback blocked:", error);
+    }
+});
 
 /* =========================
    VOLUME
 ========================= */
 
-volume.addEventListener(
-    "input",
-    () => {
-
-        audio.volume =
-            Number(volume.value) / 100;
-
-    }
-);
-
+volume.addEventListener("input", () => {
+    audio.volume = Number(volume.value);
+});
 
 /* =========================
-   START
+   SOCIAL COPY
 ========================= */
 
-loadTrack(0);
+document.querySelectorAll("[data-copy]").forEach(button => {
+
+    button.addEventListener("click", async () => {
+
+        const text = button.dataset.copy;
+
+        try {
+            await navigator.clipboard.writeText(text);
+
+            const original = button.innerHTML;
+
+            button.innerHTML = '<i class="fa-solid fa-check"></i>';
+
+            setTimeout(() => {
+                button.innerHTML = original;
+            }, 1200);
+
+        } catch (error) {
+            console.log("Copy failed:", error);
+        }
+    });
+
+});
+
+/* =========================
+   RANDOM TRACK ON RELOAD
+========================= */
+
+window.addEventListener("load", () => {
+    loadRandomTrack();
+});
