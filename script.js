@@ -1,29 +1,40 @@
 const audio = document.getElementById("audio");
 const enterScreen = document.getElementById("enter-screen");
+
 const playButton = document.getElementById("play-btn");
 const nextButton = document.getElementById("next-btn");
-const progressBar = document.getElementById("progress-bar");
-const trackName = document.getElementById("track-name");
+
 const volume = document.getElementById("volume");
-const backgroundVideo = document.getElementById("background-video");
+
+const backgroundVideo =
+    document.getElementById("background-video");
+
+
+const playIcon =
+    playButton.querySelector("i");
+
 
 const tracks = [
+
     {
         name: "rooftop",
         url: "https://r2.guns.lol/7f21016c-c349-4ed3-9658-485ebacbff43.mp3"
     },
+
     {
         name: "redflag",
         url: "https://r2.guns.lol/5cc27252-4b7d-4941-8b69-11b243fcb428.mp3"
     }
+
 ];
+
 
 let currentTrack = 0;
 let shuffle = true;
 
 
 /* =========================
-   ŁADOWANIE UTWORU
+   LOAD TRACK
 ========================= */
 
 function loadTrack(index, autoplay = false) {
@@ -31,33 +42,31 @@ function loadTrack(index, autoplay = false) {
     currentTrack =
         (index + tracks.length) % tracks.length;
 
-    const track = tracks[currentTrack];
-
-    audio.src = track.url;
-
-    trackName.textContent = track.name;
+    audio.src =
+        tracks[currentTrack].url;
 
     audio.volume =
         Number(volume.value) / 100;
 
-    progressBar.style.width = "0%";
 
     if (autoplay) {
 
         audio.play()
             .then(() => {
-                playButton.textContent = "Ⅱ";
+
+                playIcon.className =
+                    "fa-solid fa-pause";
+
             })
-            .catch(() => {
-                playButton.textContent = "▶";
-            });
+            .catch(() => {});
 
     }
+
 }
 
 
 /* =========================
-   NASTĘPNY UTWÓR
+   NEXT TRACK
 ========================= */
 
 function nextTrack() {
@@ -67,35 +76,37 @@ function nextTrack() {
     if (shuffle && tracks.length > 1) {
 
         do {
+
             next =
                 Math.floor(
                     Math.random() * tracks.length
                 );
-        }
-        while (next === currentTrack);
+
+        } while (
+            next === currentTrack
+        );
 
     } else {
 
-        next = currentTrack + 1;
+        next =
+            currentTrack + 1;
 
     }
 
+
     loadTrack(next, true);
+
 }
 
 
 /* =========================
-   CLICK TO ENTER
+   ENTER
 ========================= */
 
 function enterSite() {
 
     enterScreen.classList.add("hidden");
 
-    /*
-     * Odblokowanie odtwarzania
-     * po kliknięciu użytkownika.
-     */
 
     backgroundVideo.muted = false;
 
@@ -108,14 +119,17 @@ function enterSite() {
         .play()
         .then(() => {
 
-            playButton.textContent = "Ⅱ";
+            playIcon.className =
+                "fa-solid fa-pause";
 
         })
         .catch(() => {
 
-            playButton.textContent = "▶";
+            playIcon.className =
+                "fa-solid fa-play";
 
         });
+
 }
 
 
@@ -140,12 +154,13 @@ playButton.addEventListener(
 
                 await audio.play();
 
-                playButton.textContent = "Ⅱ";
+                playIcon.className =
+                    "fa-solid fa-pause";
 
             } catch (error) {
 
                 console.log(
-                    "Nie udało się uruchomić muzyki."
+                    "Nie można odtworzyć muzyki."
                 );
 
             }
@@ -154,8 +169,11 @@ playButton.addEventListener(
 
             audio.pause();
 
-            playButton.textContent = "▶";
+            playIcon.className =
+                "fa-solid fa-play";
+
         }
+
     }
 );
 
@@ -171,7 +189,7 @@ nextButton.addEventListener(
 
 
 /* =========================
-   AUTOMATYCZNA ZMIANA
+   AUTO NEXT
 ========================= */
 
 audio.addEventListener(
@@ -181,29 +199,7 @@ audio.addEventListener(
 
 
 /* =========================
-   PASEK POSTĘPU
-========================= */
-
-audio.addEventListener(
-    "timeupdate",
-    () => {
-
-        if (!audio.duration) {
-            return;
-        }
-
-        const percentage =
-            (audio.currentTime /
-            audio.duration) * 100;
-
-        progressBar.style.width =
-            percentage + "%";
-    }
-);
-
-
-/* =========================
-   GŁOŚNOŚĆ
+   VOLUME
 ========================= */
 
 volume.addEventListener(
@@ -215,54 +211,6 @@ volume.addEventListener(
 
     }
 );
-
-
-/* =========================
-   DISCORD
-========================= */
-
-const discordButton =
-    document.querySelector(
-        '.social[data-copy="emvi."]'
-    );
-
-if (discordButton) {
-
-    discordButton.addEventListener(
-        "click",
-        async (event) => {
-
-            event.preventDefault();
-
-            try {
-
-                await navigator.clipboard
-                    .writeText("emvi.");
-
-                const originalText =
-                    discordButton.textContent;
-
-                discordButton.textContent =
-                    "Copied!";
-
-                setTimeout(() => {
-
-                    discordButton.textContent =
-                        originalText;
-
-                }, 1000);
-
-            } catch (error) {
-
-                console.log(
-                    "Nie udało się skopiować Discorda."
-                );
-
-            }
-
-        }
-    );
-}
 
 
 /* =========================
