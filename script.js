@@ -94,3 +94,25 @@ document.querySelectorAll("[data-copy]").forEach(button => {
 window.addEventListener("load", () => {
     loadRandomTrack();
 });
+
+const titles = [
+    "E",
+    "EM",
+    "EMV",
+    "EMVi",
+    "EMV",
+    "EM",
+    "E",
+    ""
+];
+
+let titleIndex = 0;
+
+setInterval(() => {
+    document.title = titles[titleIndex];
+    titleIndex++;
+
+    if (titleIndex >= titles.length) {
+        titleIndex = 0;
+    }
+}, 400);
