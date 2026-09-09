@@ -510,3 +510,9 @@ body {
         width: 80px;
     }
 }
+
+html,
+body,
+* {
+    cursor: url("cursor.png") 0 0, auto !important;
+}
