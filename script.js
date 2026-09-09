@@ -6,7 +6,9 @@ const backgroundVideo = document.getElementById("background-video");
 const tracks = [
     "https://r2.guns.lol/7f21016c-c349-4ed3-9658-485ebacbff43.mp3",
     "https://r2.guns.lol/5cc27252-4b7d-4941-8b69-11b243fcb428.mp3",
-    "https://r2.guns.lol/e4ee006a-6c7a-449a-b537-90b69a0a2917.mp3"
+    "https://r2.guns.lol/e4ee006a-6c7a-449a-b537-90b69a0a2917.mp3",
+    "https://r2.guns.lol/c88be688-9250-49ba-9c52-eff088d9a24e.mp3",
+    "https://r2.guns.lol/e1f050c3-ad3b-4eb8-a25b-36f623c4299d.mp3"
 ];
 
 let currentTrack = null;
