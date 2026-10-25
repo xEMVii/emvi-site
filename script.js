@@ -6,6 +6,7 @@ const backgroundVideo = document.getElementById("background-video");
 const tracks = [
     "music/redflag.mp3",
     "music/style.mp3",
+    "music/CHANCE.mp3",
     "music/intoyou.mp3",
     "music/ness1.mp3",
     "music/foxboy.mp3"
